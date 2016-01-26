@@ -33,6 +33,10 @@ package br.com.thiaguten.persistence.demo;
 
 import br.com.thiaguten.persistence.dao.BaseDAO;
 
+import java.util.List;
+
 public interface UserDAO extends BaseDAO<User, Long> {
+
+    List<User> findByName(String name);
 
 }

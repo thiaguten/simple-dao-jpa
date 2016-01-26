@@ -48,10 +48,17 @@ public class User extends BaseEntity<Long> implements Versionable { // Versionab
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    //    @Transient
     @Version
     @Column(name = "VERSION")
     private long version;
+
+    public User() {
+        super();
+    }
+
+    public User(String name) {
+        this.name = name;
+    }
 
     @Override
     public Long getId() {

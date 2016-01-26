@@ -29,10 +29,11 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  * #L%
  */
-package br.com.thiaguten.persistence.demo.spring.jpa.dao.provider;
+package br.com.thiaguten.persistence.demo.jpa;
 
 import br.com.thiaguten.persistence.Persistable;
 import br.com.thiaguten.persistence.spi.provider.jpa.JPAPersistenceProvider;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,14 +44,19 @@ import java.util.List;
 import java.util.Map;
 
 @Transactional(readOnly = true)
-public class JPAPersistenceProviderSpringImpl extends JPAPersistenceProvider {
+@Service("jpaPersistenceProvider")
+public class JPAPersistenceProviderImpl extends JPAPersistenceProvider {
 
-    @PersistenceContext
     private EntityManager entityManager;
 
     @Override
     public EntityManager getEntityManager() {
         return entityManager;
+    }
+
+    @PersistenceContext
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     @Override

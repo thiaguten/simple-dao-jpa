@@ -29,38 +29,45 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  * #L%
  */
-package br.com.thiaguten.persistence.demo.manual.jpa.dao.provider;
+package br.com.thiaguten.persistence.demo.jpa;
 
+import br.com.thiaguten.persistence.dao.GenericBaseDAO;
+import br.com.thiaguten.persistence.demo.User;
 import br.com.thiaguten.persistence.demo.UserDAO;
-import br.com.thiaguten.persistence.demo.manual.AbstractPersistenceProviderManualTest;
-import br.com.thiaguten.persistence.demo.manual.jpa.dao.UserDAOJpaImpl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.testng.annotations.BeforeClass;
+import br.com.thiaguten.persistence.spi.PersistenceProvider;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
 
-/**
- * JPA persistence provider test
- *
- * @author Thiago Gutenberg
- */
-public class JPAPersistenceProviderManualImplTest extends AbstractPersistenceProviderManualTest {
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
-    private static final Logger LOG = LoggerFactory.getLogger(JPAPersistenceProviderManualImplTest.class);
+@Repository("userJpaDAO")
+public class UserDAOImpl extends GenericBaseDAO<User, Long> implements UserDAO {
 
-    private static UserDAO userDAO;
+    private PersistenceProvider persistenceProvider;
 
-    @BeforeClass
-    public static void init() {
-        LOG.info("************************************");
-        LOG.info("JPA MANUAL - Transactions Management");
-        LOG.info("************************************");
+    @Override
+    public PersistenceProvider getPersistenceProvider() {
+        return persistenceProvider;
+    }
 
-        userDAO = new UserDAOJpaImpl();
+    @Autowired
+    @Qualifier("jpaPersistenceProvider")
+    public void setPersistenceProvider(PersistenceProvider persistenceProvider) {
+        this.persistenceProvider = persistenceProvider;
     }
 
     @Override
-    public UserDAO getUserDAO() {
-        return userDAO;
+    public List<User> findByName(String name) {
+        String jpql = "SELECT u FROM User u WHERE UPPER(u.name) LIKE :name";
+        Map<String, String> namedParams = Collections.singletonMap("name", "%" + name.toUpperCase() + "%"); // like IGNORECASE and matchmode ANYWHERE
+        List<User> results = persistenceProvider.findByQueryAndNamedParams(getEntityClass(), jpql, namedParams);
+        if (results.isEmpty()) {
+            return Collections.emptyList();
+        } else {
+            return Collections.unmodifiableList(results);
+        }
     }
-
 }

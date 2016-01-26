@@ -92,7 +92,7 @@ public abstract class JPAPersistenceProvider implements PersistenceProvider {
     public <T extends Persistable<? extends Serializable>> List<T> findAll(Class<T> entityClazz, int firstResult, int maxResults) {
         CriteriaQuery<T> cq = getEntityManager().getCriteriaBuilder().createQuery(entityClazz);
         TypedQuery<T> createQuery = getEntityManager().createQuery(cq.select(cq.from(entityClazz)));
-        return JPAUtils.queryRange(createQuery, firstResult, maxResults).getResultList();
+        return queryRange(createQuery, firstResult, maxResults).getResultList();
     }
 
     /**
@@ -266,5 +266,17 @@ public abstract class JPAPersistenceProvider implements PersistenceProvider {
 //        T t = findById(entityClazz, id); // throws exception: entity must be managed to call remove: try merging the detached and try the remove again.
         T t = getEntityManager().getReference(entityClazz, id);
         getEntityManager().remove(t);
+    }
+
+    private <T extends br.com.thiaguten.persistence.Identificable<? extends Serializable> & Serializable> TypedQuery<T> queryRange(TypedQuery<T> query, int firstResult, int maxResults) {
+        if (query != null) {
+            if (maxResults >= 0) {
+                query.setMaxResults(maxResults);
+            }
+            if (firstResult >= 0) {
+                query.setFirstResult(firstResult);
+            }
+        }
+        return query;
     }
 }

@@ -5,7 +5,7 @@
 
 SimpleDAO JPA Service Provider Interface - SPI Implementation.
 
-In test package was implemented a demo example using the SimpleDAO-JPA API. A demonstration where transactions are manually controlled using (beginTransaction, commitTransaction, rollbackTransaction, etc) and another using the SpringFramework using (@Transacional).
+In the test package was implemented a demo usage example using the SimpleDAO-JPA API with SpringFramework and HikariCP connection pool.
 
 Requires JDK 1.6 or higher
 

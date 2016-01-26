@@ -17,18 +17,11 @@
 
     <context:annotation-config/>
 
-    <context:component-scan base-package="br.com.thiaguten.persistence.demo.spring.jpa"/>
+    <context:component-scan base-package="br.com.thiaguten.persistence.demo.jpa"/>
 
-    <bean id="jpaPersistenceService"
-          class="br.com.thiaguten.persistence.demo.spring.jpa.dao.provider.JPAPersistenceProviderSpringImpl"/>
-
-    <bean id="userJpaDAO" class="br.com.thiaguten.persistence.demo.spring.jpa.dao.UserDAOJpaImpl">
-        <property name="persistenceProvider" ref="jpaPersistenceService"/>
-    </bean>
-
-    <!-- HikariCP configuration -->
+    <!-- HikariCP connection pool configuration -->
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-        <property name="poolName" value="SpringHikariCP"/>
+        <property name="poolName" value="JPASpringHikariCP"/>
 
         <property name="maximumPoolSize" value="100"/>
         <property name="idleTimeout" value="30000"/>
@@ -37,9 +30,9 @@
         <property name="dataSourceClassName" value="org.hsqldb.jdbc.JDBCDataSource"/>
         <property name="dataSourceProperties">
             <props>
-                <prop key="url">jdbc:hsqldb:mem:jpaspringtestdb;shutdown=true</prop>
+                <prop key="url">jdbc:hsqldb:mem:jpatestdb;shutdown=true</prop>
                 <prop key="user">SA</prop>
-                <prop key="password"></prop>
+                <prop key="password">SA</prop>
             </props>
         </property>
     </bean>
