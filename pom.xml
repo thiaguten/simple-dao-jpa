@@ -9,7 +9,7 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <name>Simple DAO JPA</name>
-    <description>SimpleDAO JPA Service Provider Interface - SPI Implementation.</description>
+    <description>SimpleDAO JPA Implementation.</description>
     <url>https://github.com/thiaguten/simple-dao-jpa</url>
 
     <inceptionYear>2016</inceptionYear>
@@ -30,9 +30,19 @@
         <developer>
             <name>Thiago Gutenberg Carvalho da Costa</name>
             <email>thiaguten@gmail.com</email>
-            <timezone>-3</timezone>
+            <url>http://www.thiaguten.com.br</url>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>America/Sao_Paulo</timezone>
         </developer>
     </developers>
+
+    <issueManagement>
+        <system>Github</system>
+        <url>https://github.com/thiaguten/simple-dao-jpa/issues</url>
+    </issueManagement>
 
     <scm>
         <connection>scm:git:git@github.com:thiaguten/simple-dao-jpa.git</connection>
