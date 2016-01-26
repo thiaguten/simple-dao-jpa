@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/tx
+            http://www.springframework.org/schema/tx/spring-tx.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <description>
+        Spring JPA XML configurations - Object Relational Mapping (ORM) Data Access
+        See: http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#orm
+    </description>
+
+    <context:annotation-config/>
+
+    <context:component-scan base-package="br.com.thiaguten.persistence.demo.spring.jpa"/>
+
+    <bean id="jpaPersistenceService"
+          class="br.com.thiaguten.persistence.demo.spring.jpa.dao.provider.JPAPersistenceProviderSpringImpl"/>
+
+    <bean id="userJpaDAO" class="br.com.thiaguten.persistence.demo.spring.jpa.dao.UserDAOJpaImpl">
+        <property name="persistenceProvider" ref="jpaPersistenceService"/>
+    </bean>
+
+    <!-- HikariCP configuration -->
+    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+        <property name="poolName" value="SpringHikariCP"/>
+
+        <property name="maximumPoolSize" value="100"/>
+        <property name="idleTimeout" value="30000"/>
+        <property name="connectionTestQuery" value="SELECT * FROM INFORMATION_SCHEMA.SYSTEM_TABLES"/>
+
+        <property name="dataSourceClassName" value="org.hsqldb.jdbc.JDBCDataSource"/>
+        <property name="dataSourceProperties">
+            <props>
+                <prop key="url">jdbc:hsqldb:mem:jpaspringtestdb;shutdown=true</prop>
+                <prop key="user">SA</prop>
+                <prop key="password"></prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <constructor-arg ref="hikariConfig"/>
+    </bean>
+
+    <!-- JPA EntityManagerFactory configuration -->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--<property name="persistenceUnitName" value="jpaPU"/>-->
+        <property name="packagesToScan" value="br.com.thiaguten.persistence.demo"/>
+        <!--<property name="loadTimeWeaver" ref="loadTimeWeaver"/>-->
+        <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
+        <property name="jpaProperties">
+            <props>
+                <prop key="eclipselink.weaving">false</prop>
+                <prop key="eclipselink.logging.level">WARNING</prop>
+                <prop key="eclipselink.ddl-generation">create-tables</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="loadTimeWeaver" class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/>
+
+    <bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.EclipseLinkJpaDialect">
+        <property name="lazyDatabaseTransaction" value="true"/>
+    </bean>
+
+    <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter">
+        <property name="showSql" value="false"/>
+        <property name="databasePlatform" value="org.eclipse.persistence.platform.database.HSQLPlatform"/>
+    </bean>
+
+    <bean id="jpaTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="jpaTransactionManager"/>
+
+</beans>
