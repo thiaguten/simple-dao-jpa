@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/thiaguten/simple-dao-jpa.svg)](https://travis-ci.org/thiaguten/simple-dao-jpa)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/br.com.thiaguten.persistence/simple-dao-jpa/badge.svg)](https://maven-badges.herokuapp.com/maven-central/br.com.thiaguten.persistence/simple-dao-jpa)
 
-JPA DAO API that greatly facilitates the exchange and use of multiple persistence providers, like (JPA, Hibernate) in the same project.
+SimpleDAO JPA Service Provider Interface - SPI Implementation.
 
 In test package was implemented a demo example using the SimpleDAO-JPA API. A demonstration where transactions are manually controlled using (beginTransaction, commitTransaction, rollbackTransaction, etc) and another using the SpringFramework using (@Transacional).
 
