@@ -46,17 +46,16 @@ import java.util.Map;
 @Repository("userJpaDAO")
 public class UserDAOImpl extends GenericBaseDAO<User, Long> implements UserDAO {
 
-    private PersistenceProvider persistenceProvider;
+    private final PersistenceProvider persistenceProvider;
+
+    @Autowired
+    public UserDAOImpl(@Qualifier("jpaPersistenceProvider") PersistenceProvider persistenceContext) {
+        this.persistenceProvider = persistenceContext;
+    }
 
     @Override
     public PersistenceProvider getPersistenceProvider() {
         return persistenceProvider;
-    }
-
-    @Autowired
-    @Qualifier("jpaPersistenceProvider")
-    public void setPersistenceProvider(PersistenceProvider persistenceProvider) {
-        this.persistenceProvider = persistenceProvider;
     }
 
     @Override
