@@ -4,7 +4,7 @@
 
     <groupId>br.com.thiaguten.persistence</groupId>
     <artifactId>simple-dao-jpa</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
 
     <name>Simple DAO JPA</name>
     <description>SimpleDAO JPA Implementation.</description>
@@ -46,7 +46,7 @@
         <connection>scm:git:git@github.com:thiaguten/simple-dao-jpa.git</connection>
         <developerConnection>scm:git:git@github.com:thiaguten/simple-dao-jpa.git</developerConnection>
         <url>git@github.com:thiaguten/simple-dao-jpa.git</url>
-        <tag>HEAD</tag>
+        <tag>SimpleDAO-JPA-1.0.1</tag>
     </scm>
 
     <!-- http://www.slf4j.org/faq.html#excludingJCL -->
