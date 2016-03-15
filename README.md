@@ -21,7 +21,7 @@ To add a dependency using Maven, use the following:
 <dependency>
     <groupId>br.com.thiaguten.persistence</groupId>
     <artifactId>simple-dao-jpa</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
@@ -29,7 +29,7 @@ To add a dependency using Gradle:
 
 ```
 dependencies {
-    compile 'br.com.thiaguten.persistence:simple-dao-jpa:1.0.0'
+    compile 'br.com.thiaguten.persistence:simple-dao-jpa:1.0.1'
 }
 ```
 
