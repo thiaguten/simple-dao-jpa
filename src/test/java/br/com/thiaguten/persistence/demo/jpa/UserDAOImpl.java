@@ -31,7 +31,7 @@
  */
 package br.com.thiaguten.persistence.demo.jpa;
 
-import br.com.thiaguten.persistence.dao.GenericBaseDAO;
+import br.com.thiaguten.persistence.core.GenericBasePersistence;
 import br.com.thiaguten.persistence.demo.User;
 import br.com.thiaguten.persistence.demo.UserDAO;
 import br.com.thiaguten.persistence.spi.PersistenceProvider;
@@ -44,7 +44,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository("userJpaDAO")
-public class UserDAOImpl extends GenericBaseDAO<User, Long> implements UserDAO {
+public class UserDAOImpl extends GenericBasePersistence<Long, User> implements UserDAO {
 
     private final PersistenceProvider persistenceProvider;
 
@@ -62,7 +62,7 @@ public class UserDAOImpl extends GenericBaseDAO<User, Long> implements UserDAO {
     public List<User> findByName(String name) {
         String jpql = "SELECT u FROM User u WHERE UPPER(u.name) LIKE :name";
         Map<String, String> namedParams = Collections.singletonMap("name", "%" + name.toUpperCase() + "%"); // like IGNORECASE and matchmode ANYWHERE
-        List<User> results = persistenceProvider.findByQueryAndNamedParams(getEntityClass(), jpql, namedParams);
+        List<User> results = persistenceProvider.findByQueryAndNamedParams(getPersistenceClass(), jpql, namedParams);
         if (results.isEmpty()) {
             return Collections.emptyList();
         } else {

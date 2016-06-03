@@ -66,7 +66,7 @@ public class JPAPersistenceProviderImplTest extends AbstractTransactionalTestNGS
     public void crudTest() {
         // create
         User user = new User("THIAGO");
-        User userSave = userDAO.save(user);
+        User userSave = userDAO.create(user);
         log.info("Created: " + userSave);
 
         List<User> users = userDAO.findByName(userSave.getName());
@@ -75,7 +75,7 @@ public class JPAPersistenceProviderImplTest extends AbstractTransactionalTestNGS
         assertEquals(users.get(0).getName(), userSave.getName());
 
         // read
-        User userSavedFound = userDAO.findById(userSave.getId());
+        User userSavedFound = userDAO.read(userSave.getId());
         log.info("Read: " + userSavedFound);
         assertNotNull(userSavedFound);
         assertEquals(userSavedFound.getName(), userSave.getName());
@@ -88,7 +88,7 @@ public class JPAPersistenceProviderImplTest extends AbstractTransactionalTestNGS
 
         // read
         assertNotNull(userUpdate.getId());
-        User userUpdatedFound = userDAO.findById(userUpdate.getId());
+        User userUpdatedFound = userDAO.read(userUpdate.getId());
         log.info("Read: " + userUpdatedFound);
         assertNotNull(userUpdatedFound);
         assertEquals(userUpdatedFound.getName(), userUpdate.getName());
@@ -99,7 +99,7 @@ public class JPAPersistenceProviderImplTest extends AbstractTransactionalTestNGS
 
         // read
         assertNotNull(userUpdatedFound.getId());
-        User userDeleted = userDAO.findById(userUpdatedFound.getId());
+        User userDeleted = userDAO.read(userUpdatedFound.getId());
         log.info("Read: " + userDeleted);
         assertNull(userDeleted);
     }

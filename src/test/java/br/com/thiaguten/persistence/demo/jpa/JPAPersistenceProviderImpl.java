@@ -31,7 +31,7 @@
  */
 package br.com.thiaguten.persistence.demo.jpa;
 
-import br.com.thiaguten.persistence.Persistable;
+import br.com.thiaguten.persistence.core.Persistable;
 import br.com.thiaguten.persistence.spi.provider.jpa.JPAPersistenceProvider;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -60,32 +60,32 @@ public class JPAPersistenceProviderImpl extends JPAPersistenceProvider {
     }
 
     @Override
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public <T extends Persistable<? extends Serializable>> T save(T entity) {
         return super.save(entity);
     }
 
     @Override
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public <T extends Persistable<? extends Serializable>> T update(T entity) {
         return super.update(entity);
     }
 
     @Override
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED)
     public <T extends Persistable<? extends Serializable>> void delete(Class<T> entityClazz, T entity) {
         super.delete(entityClazz, entity);
     }
 
     @Override
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public <T extends Persistable<? extends Serializable>, PK extends Serializable> void deleteById(Class<T> entityClazz, PK pk) {
-        super.deleteById(entityClazz, pk);
+    @Transactional(propagation = Propagation.REQUIRED)
+    public <ID extends Serializable, T extends Persistable<ID>> void deleteById(Class<T> entityClazz, ID id) {
+        super.deleteById(entityClazz, id);
     }
 
     @Override
-    public <T extends Persistable<? extends Serializable>, PK extends Serializable> T findById(Class<T> entityClazz, PK pk) {
-        return super.findById(entityClazz, pk);
+    public <ID extends Serializable, T extends Persistable<ID>> T findById(Class<T> entityClazz, ID id) {
+        return super.findById(entityClazz, id);
     }
 
     @Override
@@ -127,4 +127,5 @@ public class JPAPersistenceProviderImpl extends JPAPersistenceProvider {
     public <T extends Number> T countByQueryAndNamedParams(Class<T> resultClazz, String query, Map<String, ?> params) {
         return super.countByQueryAndNamedParams(resultClazz, query, params);
     }
+
 }

@@ -31,11 +31,11 @@
  */
 package br.com.thiaguten.persistence.demo;
 
-import br.com.thiaguten.persistence.dao.BaseDAO;
+import br.com.thiaguten.persistence.core.BasePersistence;
 
 import java.util.List;
 
-public interface UserDAO extends BaseDAO<User, Long> {
+public interface UserDAO extends BasePersistence<Long, User> {
 
     List<User> findByName(String name);
 

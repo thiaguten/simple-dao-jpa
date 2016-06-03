@@ -31,7 +31,7 @@
  */
 package br.com.thiaguten.persistence.spi.provider.jpa;
 
-import br.com.thiaguten.persistence.Persistable;
+import br.com.thiaguten.persistence.core.Persistable;
 import br.com.thiaguten.persistence.spi.PersistenceProvider;
 
 import javax.persistence.EntityManager;
@@ -51,29 +51,22 @@ import java.util.Map;
 public abstract class JPAPersistenceProvider implements PersistenceProvider {
 
     /**
-     * Get entity manager
+     * Get the entity manager.
      *
-     * @return entity manager
+     * @return the entity manager
      */
     public abstract EntityManager getEntityManager();
 
     /**
-     * Find an entity by its primary key.
-     *
-     * @param entityClazz the entity class
-     * @param pk          the primary key
-     * @return the entity
+     * {@inheritDoc}
      */
     @Override
-    public <T extends Persistable<? extends Serializable>, PK extends Serializable> T findById(Class<T> entityClazz, PK pk) {
-        return getEntityManager().find(entityClazz, pk);
+    public <ID extends Serializable, T extends Persistable<ID>> T findById(Class<T> entityClazz, ID id) {
+        return getEntityManager().find(entityClazz, id);
     }
 
     /**
-     * Load all entities.
-     *
-     * @param entityClazz the entity class
-     * @return the list of entities
+     * {@inheritDoc}
      */
     @Override
     public <T extends Persistable<? extends Serializable>> List<T> findAll(Class<T> entityClazz) {
@@ -81,12 +74,7 @@ public abstract class JPAPersistenceProvider implements PersistenceProvider {
     }
 
     /**
-     * Load entities.
-     *
-     * @param entityClazz the entity class
-     * @param firstResult the value of first result
-     * @param maxResults  the value of max result
-     * @return the list of entities
+     * {@inheritDoc}
      */
     @Override
     public <T extends Persistable<? extends Serializable>> List<T> findAll(Class<T> entityClazz, int firstResult, int maxResults) {
@@ -96,12 +84,7 @@ public abstract class JPAPersistenceProvider implements PersistenceProvider {
     }
 
     /**
-     * Find by named query.
-     *
-     * @param entityClazz the entity class
-     * @param queryName   the name of the query
-     * @param params      the query parameters
-     * @return the list of entities
+     * {@inheritDoc}
      */
     @Override
     public <T extends Persistable<? extends Serializable>> List<T> findByNamedQuery(Class<T> entityClazz, String queryName, Object... params) {
@@ -115,12 +98,7 @@ public abstract class JPAPersistenceProvider implements PersistenceProvider {
     }
 
     /**
-     * Find by named query.
-     *
-     * @param entityClazz the entity class
-     * @param queryName   the name of the query
-     * @param params      the query parameters
-     * @return the list of entities
+     * {@inheritDoc}
      */
     @Override
     public <T extends Persistable<? extends Serializable>> List<T> findByNamedQueryAndNamedParams(Class<T> entityClazz, String queryName, Map<String, ?> params) {
@@ -134,12 +112,7 @@ public abstract class JPAPersistenceProvider implements PersistenceProvider {
     }
 
     /**
-     * Find by query (JPQL/HQL, etc) and parameters.
-     *
-     * @param entityClazz the entity class
-     * @param query       the typed query
-     * @param params      the typed query parameters
-     * @return the list of entities
+     * {@inheritDoc}
      */
     @Override
     public <T extends Persistable<? extends Serializable>> List<T> findByQueryAndNamedParams(Class<T> entityClazz, String query, Map<String, ?> params) {
@@ -153,10 +126,7 @@ public abstract class JPAPersistenceProvider implements PersistenceProvider {
     }
 
     /**
-     * Count all entities.
-     *
-     * @param entityClazz the entity class
-     * @return the number of entities
+     * {@inheritDoc}
      */
     @Override
     public <T extends Persistable<? extends Serializable>> long countAll(Class<T> entityClazz) {
@@ -167,12 +137,7 @@ public abstract class JPAPersistenceProvider implements PersistenceProvider {
     }
 
     /**
-     * Count by named query and parameters.
-     *
-     * @param resultClazz the number class
-     * @param queryName   the named query
-     * @param params      the named query parameters
-     * @return the count of entities
+     * {@inheritDoc}
      */
     @Override
     public <T extends Number> T countByNamedQueryAndNamedParams(Class<T> resultClazz, String queryName, Map<String, ?> params) {
@@ -186,12 +151,7 @@ public abstract class JPAPersistenceProvider implements PersistenceProvider {
     }
 
     /**
-     * Count by (JPQL/HQL, etc) and parameters.
-     *
-     * @param resultClazz the number class
-     * @param query       the typed query
-     * @param params      the typed query parameters
-     * @return the count of entities
+     * {@inheritDoc}
      */
     @Override
     public <T extends Number> T countByQueryAndNamedParams(Class<T> resultClazz, String query, Map<String, ?> params) {
@@ -205,10 +165,7 @@ public abstract class JPAPersistenceProvider implements PersistenceProvider {
     }
 
     /**
-     * Save an entity.
-     *
-     * @param entity the entity to save
-     * @return the saved entity
+     * {@inheritDoc}
      */
     @Override
     public <T extends Persistable<? extends Serializable>> T save(T entity) {
@@ -221,10 +178,7 @@ public abstract class JPAPersistenceProvider implements PersistenceProvider {
     }
 
     /**
-     * Update an entity.
-     *
-     * @param entity the entity to update
-     * @return the updated entity
+     * {@inheritDoc}
      */
     @Override
     public <T extends Persistable<? extends Serializable>> T update(T entity) {
@@ -232,10 +186,7 @@ public abstract class JPAPersistenceProvider implements PersistenceProvider {
     }
 
     /**
-     * Delete an entity.
-     *
-     * @param entityClazz the entity class
-     * @param entity      the entity to delete
+     * {@inheritDoc}
      */
     @Override
     public <T extends Persistable<? extends Serializable>> void delete(Class<T> entityClazz, T entity) {
@@ -243,32 +194,29 @@ public abstract class JPAPersistenceProvider implements PersistenceProvider {
     }
 
     /**
-     * Delete an entity.
-     *
-     * @param entityClazz the entity class
-     * @param pk          primary key of the entity to delete
+     * {@inheritDoc}
      */
     @Override
-    public <T extends Persistable<? extends Serializable>, PK extends Serializable> void deleteById(Class<T> entityClazz, PK pk) {
-        deleteByEntityOrId(entityClazz, null, pk);
+    public <ID extends Serializable, T extends Persistable<ID>> void deleteById(Class<T> entityClazz, ID id) {
+        deleteByEntityOrId(entityClazz, null, id);
     }
 
     @SuppressWarnings("unchecked")
-    private <T extends Persistable<? extends Serializable>, PK extends Serializable> void deleteByEntityOrId(Class<T> entityClazz, T entity, PK pk) {
-        if (pk == null && (entity == null || entity.getId() == null)) {
+    private <ID extends Serializable, T extends Persistable<? extends Serializable>> void deleteByEntityOrId(Class<T> entityClazz, T entity, ID id) {
+        if (id == null && (entity == null || entity.getId() == null)) {
             throw new PersistenceException("Could not delete. ID is null.");
         }
 
-        PK id = pk;
-        if (id == null) {
-            id = (PK) entity.getId();
+        ID _id = id;
+        if (_id == null) {
+            _id = (ID) entity.getId();
         }
-//        T t = findById(entityClazz, id); // throws exception: entity must be managed to call remove: try merging the detached and try the remove again.
-        T t = getEntityManager().getReference(entityClazz, id);
+//        T t = findById(entityClazz, _id); // throws exception: entity must be managed to call remove: try merging the detached and try the remove again.
+        T t = getEntityManager().getReference(entityClazz, _id);
         getEntityManager().remove(t);
     }
 
-    private <T extends br.com.thiaguten.persistence.Identificable<? extends Serializable> & Serializable> TypedQuery<T> queryRange(TypedQuery<T> query, int firstResult, int maxResults) {
+    private <T extends Persistable<? extends Serializable>> TypedQuery<T> queryRange(TypedQuery<T> query, int firstResult, int maxResults) {
         if (query != null) {
             if (maxResults >= 0) {
                 query.setMaxResults(maxResults);
@@ -279,4 +227,5 @@ public abstract class JPAPersistenceProvider implements PersistenceProvider {
         }
         return query;
     }
+
 }

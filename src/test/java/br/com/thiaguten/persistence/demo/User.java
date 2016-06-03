@@ -31,7 +31,7 @@
  */
 package br.com.thiaguten.persistence.demo;
 
-import br.com.thiaguten.persistence.Versionable;
+import br.com.thiaguten.persistence.core.Versionable;
 import br.com.thiaguten.persistence.entity.BaseEntity;
 
 import javax.persistence.*;
