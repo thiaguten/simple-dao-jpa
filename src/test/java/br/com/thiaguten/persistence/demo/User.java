@@ -31,14 +31,14 @@
  */
 package br.com.thiaguten.persistence.demo;
 
+import br.com.thiaguten.persistence.core.Persistable;
 import br.com.thiaguten.persistence.core.Versionable;
-import br.com.thiaguten.persistence.entity.BaseEntity;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "USER")
-public class User extends BaseEntity<Long> implements Versionable { // Versionable is optional
+public class User implements Persistable<Long>, Versionable { // Versionable is optional
 
     @Id
     @Column(name = "ID", nullable = false)
