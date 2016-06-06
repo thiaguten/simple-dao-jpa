@@ -31,7 +31,7 @@
  */
 package br.com.thiaguten.persistence.demo.jpa;
 
-import br.com.thiaguten.persistence.core.GenericPersistence;
+import br.com.thiaguten.persistence.core.BasePersistence;
 import br.com.thiaguten.persistence.demo.User;
 import br.com.thiaguten.persistence.demo.UserDAO;
 import br.com.thiaguten.persistence.spi.PersistenceProvider;
@@ -44,7 +44,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository("userJpaDAO")
-public class UserDAOImpl extends GenericPersistence<Long, User> implements UserDAO {
+public class UserDAOImpl extends BasePersistence<Long, User> implements UserDAO {
 
     private final PersistenceProvider persistenceProvider;
 
