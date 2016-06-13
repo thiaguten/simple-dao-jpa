@@ -26,6 +26,7 @@
 
     <developers>
         <developer>
+            <id>thiaguten</id>
             <name>Thiago Gutenberg Carvalho da Costa</name>
             <email>thiaguten@gmail.com</email>
             <url>http://www.thiaguten.com.br</url>
@@ -64,12 +65,12 @@
             <dependency>
                 <groupId>commons-logging</groupId>
                 <artifactId>commons-logging</artifactId>
-                <version>99-empty</version>
+                <version>1.2</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-framework-bom</artifactId>
-                <version>${spring.version}</version>
+                <version>4.3.0.RELEASE</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -318,7 +319,6 @@
         <testng.version>6.8.21</testng.version>
         <hsqldb.version>2.3.4</hsqldb.version>
         <hikaricp.version>2.3.13</hikaricp.version>
-        <spring.version>4.2.6.RELEASE</spring.version>
     </properties>
 
 </project>
