@@ -2,6 +2,9 @@
 
 [![Build Status](https://travis-ci.org/thiaguten/simple-dao-jpa.svg)](https://travis-ci.org/thiaguten/simple-dao-jpa)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/br.com.thiaguten.persistence/simple-dao-jpa/badge.svg)](https://maven-badges.herokuapp.com/maven-central/br.com.thiaguten.persistence/simple-dao-jpa)
+[![Javadoc](https://javadoc-emblem.rhcloud.com/doc/br.com.thiaguten.persistence/simple-dao-jpa/badge.svg)](http://www.javadoc.io/doc/br.com.thiaguten.persistence/simple-dao-jpa)
+[![License](https://img.shields.io/hexpm/l/plug.svg?maxAge=2592000)](https://www.apache.org/licenses/LICENSE-2.0.html)
+[![Dependency Status](https://www.versioneye.com/user/projects/577e7c1e5bb139003969d9e3/badge.svg)](https://www.versioneye.com/user/projects/577e7c1e5bb139003969d9e3)
 
 SimpleDAO JPA Implementation.
 
