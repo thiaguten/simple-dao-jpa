@@ -160,7 +160,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>3.6.0</version>
                 <inherited>true</inherited>
                 <configuration>
                     <source>${java.version}</source>
@@ -218,7 +218,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-                <version>1.9</version>
+                <version>1.10</version>
                 <configuration>
                     <verbose>false</verbose>
                     <addSvnKeyWords>false</addSvnKeyWords>
@@ -318,7 +318,7 @@
         <testng.version>6.8.21</testng.version>
         <hsqldb.version>2.3.4</hsqldb.version>
         <hikaricp.version>2.3.13</hikaricp.version>
-        <spring.version>4.3.0.RELEASE</spring.version>
+        <spring.version>4.3.3.RELEASE</spring.version>
     </properties>
 
 </project>
