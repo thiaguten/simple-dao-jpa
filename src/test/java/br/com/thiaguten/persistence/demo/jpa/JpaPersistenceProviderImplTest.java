@@ -34,9 +34,9 @@ import java.util.List;
 import static org.testng.Assert.*;
 
 @ContextConfiguration(locations = {"classpath:spring/persistence-jpa-appContext.xml"})
-public class JPAPersistenceProviderImplTest extends AbstractTransactionalTestNGSpringContextTests {
+public class JpaPersistenceProviderImplTest extends AbstractTransactionalTestNGSpringContextTests {
 
-    private static final Logger log = LoggerFactory.getLogger(JPAPersistenceProviderImplTest.class);
+    private static final Logger log = LoggerFactory.getLogger(JpaPersistenceProviderImplTest.class);
 
     @Autowired
     @Qualifier("userJpaDAO")
