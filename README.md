@@ -10,4 +10,4 @@ SimpleDAO JPA Implementation.
 
 In the test package was implemented a demo usage example using the SimpleDAO-JPA API with SpringFramework and HikariCP connection pool.
 
-Requires JDK 1.6 or higher.
+Requires JDK 1.8 or higher.
