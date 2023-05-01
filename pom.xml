@@ -315,7 +315,7 @@
         <eclipselink.version>2.7.4</eclipselink.version>
         <slf4j.version>1.7.26</slf4j.version>
         <logback.version>1.2.3</logback.version>
-        <testng.version>6.14.3</testng.version>
+        <testng.version>7.7.0</testng.version>
         <hsqldb.version>2.4.1</hsqldb.version>
         <hikaricp.version>3.3.1</hikaricp.version>
         <spring.version>5.1.18.RELEASE</spring.version>
